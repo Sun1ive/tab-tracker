@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import db from './models';
 
-import Api from './api/index';
+import routes from './routes/index';
 import config from './config/config';
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use('/', Api);
+app.use('/', routes);
 
 db.sequelize.sync().then(() => {
   /* eslint-disable no-console */

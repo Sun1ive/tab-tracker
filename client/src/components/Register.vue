@@ -8,12 +8,23 @@
             label="email" 
             v-model="email"
             placeholder="email"
+            type="text"
           />
           <v-text-field 
             label="password" 
             v-model="password"
             placeholder="password"
+            type="password"
           />
+          <v-alert 
+            v-if="isError"
+            color="error"
+            icon="warning"
+            value="true"
+            outline 
+          >
+            {{ error }}
+          </v-alert>
           <v-btn type="submit">Register</v-btn>
         </v-form>
       </v-flex>
@@ -28,14 +39,25 @@ export default {
   data: () => ({
     email: '',
     password: '',
+    error: null,
   }),
+  computed: {
+    isError() {
+      return this.error
+    }
+  },
   methods: {
     async onRegister() {
-      const { data } = await AuthenticationService.register({
-        email: this.email,
-        password: this.password,
-      });
-      console.log(data);
+      try {
+        const { data } = await AuthenticationService.register({
+          email: this.email,
+          password: this.password,
+        });
+        /* eslint-disable no-console */
+        console.log(data);
+      } catch (error) {
+        this.error = error.response.data.error;
+      }
     },
   },
 };
