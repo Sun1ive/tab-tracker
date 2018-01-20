@@ -25,7 +25,7 @@
           >
             {{ error }}
           </v-alert>
-          <v-btn type="submit">Register</v-btn>
+          <v-btn color="cyan" dark type="submit">Register</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
