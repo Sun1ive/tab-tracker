@@ -1,10 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import db from './models';
 
 import Api from './api/index';
+import config from './config/config';
 
-const PORT = process.env.PORT || 3000;
 const app = express();
 app.disable('etag').disable('x-powered-by');
 
@@ -14,5 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', Api);
 
-/* eslint-disable no-console */
-app.listen(PORT, () => console.log(`Server is running at port ${PORT}`));
+db.sequelize.sync().then(() => {
+  /* eslint-disable no-console */
+  app.listen(config.port, () => console.log(`Server is running at port ${config.port}`));
+});
