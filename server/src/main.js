@@ -15,7 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', routes);
 
-db.sequelize.sync().then(() => {
-  /* eslint-disable no-console */
-  app.listen(config.port, () => console.log(`Server is running at port ${config.port}`));
-});
+db.sequelize
+  // .sync({ force: true })
+  .sync()
+  .then(() => {
+    /* eslint-disable no-console */
+    app.listen(config.port, () => console.log(`Server is running at port ${config.port}`));
+  });

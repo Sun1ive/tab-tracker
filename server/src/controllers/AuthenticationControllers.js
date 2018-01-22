@@ -23,16 +23,20 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await db.User.findOne({
+
+    const user = await db.User.find({
       where: {
         email,
       },
     });
+
     if (!user) {
       res.status(403).json({ error: 'The login information was incorrect' });
     }
+    const isPasswordValid = await user.comparePassword(password);
 
-    const isPasswordValid = password === user.password;
+    console.log(isPasswordValid);
+
     if (!isPasswordValid) {
       res.status(403).json({ error: 'The login information was incorrect' });
     }
@@ -45,6 +49,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     res.status(500).send({
+      err: error,
       error: 'An error has occured trying to log in',
     });
   }
