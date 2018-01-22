@@ -4,8 +4,6 @@ import * as AuthenticationControllerPolicy from '../policies/AuthenticationContr
 
 const router = express.Router();
 
-router.get('/', AuthenticationControllers.get);
-
 router.post('/register', AuthenticationControllerPolicy.register, AuthenticationControllers.register);
 
 router.post('/login', AuthenticationControllers.login);

@@ -1,4 +1,13 @@
+import jwt from 'jsonwebtoken';
 import db from '../models/index';
+import config from '../config/config';
+
+function jwtSignUser(user) {
+  const ONE_WEEK = 60 * 60 * 24 * 7;
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK,
+  });
+}
 
 export const register = async (req, res) => {
   try {
@@ -20,14 +29,23 @@ export const login = async (req, res) => {
       },
     });
     if (!user) {
-      res.status(403).json({
-        error: 'The login information was incorrect',
-      });
+      res.status(403).json({ error: 'The login information was incorrect' });
     }
-    res.send(user.toJSON());
+
+    const isPasswordValid = password === user.password;
+    if (!isPasswordValid) {
+      res.status(403).json({ error: 'The login information was incorrect' });
+    }
+
+    const userJson = user.toJSON();
+    res.send({
+      message: 'Ok',
+      user: userJson,
+      token: jwtSignUser(userJson),
+    });
   } catch (error) {
-    res.status(409).send({
-      error: 'This email already in use.',
+    res.status(500).send({
+      error: 'An error has occured trying to log in',
     });
   }
 };
