@@ -11,6 +11,23 @@ export const register = async (req, res) => {
   }
 };
 
-export const get = (req, res) => {
-  res.send({ message: 'Hello World ' });
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await db.User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!user) {
+      res.status(403).json({
+        error: 'The login information was incorrect',
+      });
+    }
+    res.send(user.toJSON());
+  } catch (error) {
+    res.status(409).send({
+      error: 'This email already in use.',
+    });
+  }
 };

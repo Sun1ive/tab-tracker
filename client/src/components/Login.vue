@@ -4,10 +4,10 @@
       <v-flex xs10 sm6 class="text-xs-center">
         <v-card>
           <v-toolbar flat dense class="cyan" dark>
-            <v-toolbar-title>Register</v-toolbar-title>
+            <v-toolbar-title>Log in</v-toolbar-title>
           </v-toolbar>
           <v-flex xs10 offset-xs1>
-            <v-form @submit.prevent="onRegister">
+            <v-form @submit.prevent="onLogin">
               <v-text-field 
                 label="E-mail" 
                 v-model="email"
@@ -47,13 +47,13 @@ export default {
   }),
   computed: {
     isError() {
-      return this.error
-    }
+      return this.error;
+    },
   },
   methods: {
-    async onRegister() {
+    async onLogin() {
       try {
-        const { data } = await AuthenticationService.register({
+        const { data } = await AuthenticationService.login({
           email: this.email,
           password: this.password,
         });
