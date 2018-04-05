@@ -1,3 +1,5 @@
+import Sequelize from 'sequelize';
+
 export default {
   port: process.env.PORT || 8081,
   db: {
@@ -6,6 +8,7 @@ export default {
     password: process.env.DB_PASS || 'tabtracker',
     options: {
       dialect: process.env.DIALECT || 'sqlite',
+      operatorsAliases: process.env.aliases || Sequelize.Op,
       host: process.env.HOST || 'localhost',
       storage: './tabtracker.sqlite',
     },
