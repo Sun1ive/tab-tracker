@@ -57,8 +57,8 @@ export default {
           email: this.email,
           password: this.password,
         });
-        /* eslint-disable no-console */
-        console.log(data);
+        this.$store.dispatch('setToken', data.token);
+        this.$store.dispatch('setUser', data.user);
       } catch (error) {
         this.error = error.response.data.error;
       }
@@ -68,5 +68,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
