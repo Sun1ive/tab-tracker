@@ -35,10 +35,10 @@ app.use(_express2.default.urlencoded({ extended: true }));
 app.use((0, _cors2.default)());
 app.use('/', _index2.default);
 
-_models2.default.sequelize
-// .sync({ force: true })
-.sync().then(() => {
+_models2.default.sequelize.sync({ force: true })
+// .sync()
+.then(() => {
   /* eslint-disable no-console */
   app.listen(_config2.default.port, () => console.log(`Server is running at port ${_config2.default.port}`));
-}).catch(e => console.log(e));
+});
 //# sourceMappingURL=main.js.map

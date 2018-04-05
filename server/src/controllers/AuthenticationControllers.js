@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import db from '../models/index';
+import { User } from '../models/index';
 import config from '../config/config';
 
 function jwtSignUser(user) {
@@ -11,8 +11,9 @@ function jwtSignUser(user) {
 
 export const register = async (req, res) => {
   try {
-    const user = await db.User.create(req.body);
-    res.send(user.toJSON());
+    const user = await User.create(req.body);
+    console.log(user)
+    res.status(200).json(user)
   } catch (error) {
     res.status(409).send({
       error: 'This email already in use.',
@@ -24,7 +25,7 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await db.User.find({
+    const user = await User.find({
       where: {
         email,
       },

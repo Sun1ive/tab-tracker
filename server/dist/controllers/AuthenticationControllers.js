@@ -11,8 +11,6 @@ var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
 var _index = require('../models/index');
 
-var _index2 = _interopRequireDefault(_index);
-
 var _config = require('../config/config');
 
 var _config2 = _interopRequireDefault(_config);
@@ -28,8 +26,9 @@ function jwtSignUser(user) {
 
 const register = exports.register = async (req, res) => {
   try {
-    const user = await _index2.default.User.create(req.body);
-    res.send(user.toJSON());
+    const user = await _index.User.create(req.body);
+    console.log(user);
+    res.status(200).json(user);
   } catch (error) {
     res.status(409).send({
       error: 'This email already in use.'
@@ -41,7 +40,7 @@ const login = exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await _index2.default.User.find({
+    const user = await _index.User.find({
       where: {
         email
       }
