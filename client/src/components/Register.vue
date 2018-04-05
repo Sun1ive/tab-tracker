@@ -8,6 +8,15 @@
           </v-toolbar>
           <v-flex xs10 offset-xs1>
             <v-form @submit.prevent="onRegister">
+              <v-alert 
+                v-if="isError"
+                color="error"
+                icon="warning"
+                value="true"
+                outline 
+              >
+                {{ error }}
+              </v-alert>
               <v-text-field 
                 label="E-mail" 
                 v-model="email"
@@ -18,15 +27,6 @@
                 v-model="password"
                 type="password"
               />
-              <v-alert 
-                v-if="isError"
-                color="error"
-                icon="warning"
-                value="true"
-                outline 
-              >
-                {{ error }}
-              </v-alert>
               <v-btn color="cyan" dark type="submit">Register</v-btn>
             </v-form>
           </v-flex>
@@ -47,18 +47,19 @@ export default {
   }),
   computed: {
     isError() {
-      return this.error
-    }
+      return this.error;
+    },
   },
   methods: {
     async onRegister() {
       try {
-        const { data } = await AuthenticationService.register({
+        await AuthenticationService.register({
           email: this.email,
           password: this.password,
         });
-        /* eslint-disable no-console */
-        console.log(data);
+        if (this.error) {
+          this.error = null;
+        }
       } catch (error) {
         this.error = error.response.data.error;
       }
@@ -68,5 +69,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

@@ -8,6 +8,15 @@
           </v-toolbar>
           <v-flex xs10 offset-xs1>
             <v-form @submit.prevent="onLogin">
+              <v-alert 
+                v-if="isError"
+                color="error"
+                icon="warning"
+                value="true"
+                outline 
+              >
+                {{ error }}
+              </v-alert>
               <v-text-field 
                 label="E-mail" 
                 v-model="email"
@@ -18,15 +27,6 @@
                 v-model="password"
                 type="password"
               />
-              <v-alert 
-                v-if="isError"
-                color="error"
-                icon="warning"
-                value="true"
-                outline 
-              >
-                {{ error }}
-              </v-alert>
               <v-btn color="cyan" dark type="submit">Register</v-btn>
             </v-form>
           </v-flex>
