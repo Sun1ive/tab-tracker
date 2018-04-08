@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-import { sync } from 'vuex-router-sync';
+// import { sync } from 'vuex-router-sync';
 import 'vuetify/dist/vuetify.min.css';
 import App from './App';
 import router from './router';
