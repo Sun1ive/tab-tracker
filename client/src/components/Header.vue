@@ -4,11 +4,7 @@
       <span class="logo">TabTracker</span>
     </v-toolbar-title>
     <v-toolbar-items>
-      <v-btn 
-        flat 
-        dark 
-        to="/browse"
-      >Browse</v-btn>
+      <v-btn to="songs" flat>Browse</v-btn>
     </v-toolbar-items>
     <v-spacer />
     <v-toolbar-items>
@@ -31,10 +27,6 @@ export default {
       if (this.$store.state.isAuth) {
         return [
           {
-            title: 'Browse',
-            to: '/browse',
-          },
-          {
             title: 'Logout',
             to: '/logout',
           },
@@ -56,9 +48,5 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.logo
-  cursor pointer
-  transition .4s ease-in-out
-  &:hover
-    color #E93334
+
 </style>

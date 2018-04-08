@@ -22,5 +22,9 @@ export default new Router({
       path: '/logout',
       component: () => import('@/components/Logout'),
     },
+    {
+      path: '/Songs',
+      component: () => import('@/components/Songs'),
+    },
   ],
 });
