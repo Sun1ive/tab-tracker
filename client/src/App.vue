@@ -13,6 +13,7 @@
 import Header from './components/Header';
 
 export default {
+  name: 'Root',
   components: {
     'app-header': Header,
   },

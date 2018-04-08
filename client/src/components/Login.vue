@@ -57,8 +57,9 @@ export default {
           email: this.email,
           password: this.password,
         });
-        this.$store.dispatch('setToken', data.token);
-        this.$store.dispatch('setUser', data.user);
+        await this.$store.dispatch('setToken', data.token);
+        await this.$store.dispatch('setUser', data.user);
+        this.$router.push({ name: 'Root' });
       } catch (error) {
         this.error = error.response.data.error;
       }

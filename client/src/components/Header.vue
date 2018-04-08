@@ -25,13 +25,22 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      btns: [
-        {
-          title: 'Browse',
-          to: '/browse',
-        },
+export default {
+  computed: {
+    btns() {
+      if (this.$store.state.isAuth) {
+        return [
+          {
+            title: 'Browse',
+            to: '/browse',
+          },
+          {
+            title: 'Logout',
+            to: '/logout',
+          },
+        ];
+      }
+      return [
         {
           title: 'Sing Up',
           to: '/register',
@@ -40,9 +49,10 @@
           title: 'Sign In',
           to: '/login',
         },
-      ]
-    })
-  }
+      ];
+    },
+  },
+};
 </script>
 
 <style lang="stylus" scoped>

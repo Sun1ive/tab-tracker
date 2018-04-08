@@ -8,15 +8,19 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/components/Home')
+      component: () => import('@/components/Home'),
     },
     {
       path: '/register',
-      component: () => import('@/components/Register')
+      component: () => import('@/components/Register'),
     },
     {
       path: '/login',
-      component: () => import('@/components/Login')
+      component: () => import('@/components/Login'),
+    },
+    {
+      path: '/logout',
+      component: () => import('@/components/Logout'),
     },
   ],
 });
