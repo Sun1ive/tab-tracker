@@ -22,7 +22,7 @@
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.1",
     "morgan": "^1.9.0",
-    "nodemon": "^1.17.3",
+    "nodemon": "^2.0.17",
     "sequelize": "^4.37.5",
     "sqlite3": "^4.0.0"
   },
