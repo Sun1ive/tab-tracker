@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon dev.js",
-    "start": "rm -rf ./dist && babel -d ./dist ./src -s && node dist/main.js"
+    "start": "rm -rf ./dist && babel -d ./dist ./src -s && node dist/main.js",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +26,8 @@
     "morgan": "^1.9.0",
     "nodemon": "^1.17.3",
     "sequelize": "^4.37.5",
-    "sqlite3": "^4.0.0"
+    "sqlite3": "^4.0.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -32,5 +35,6 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-node": "^6.0.1"
-  }
+  },
+  "snyk": true
 }
